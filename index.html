@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>find-AI</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* 容器布局 */
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+        /* 框架样式 */
+        .frame-wrapper {
+            flex: 1;
+            padding: 10px;
+            background: #f0f0f0;
+            border-right: 2px solid #ddd;
+        }
+        /* 最后一个框架去掉右边框 */
+        .frame-wrapper:last-child {
+            border-right: none;
+        }
+        /* iframe样式 */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+        }
+        /* 标题样式 */
+        .frame-title {
+            text-align: center;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .frame-wrapper {
+                height: 50vh;
+                border-right: none;
+                border-bottom: 2px solid #ddd;
+            }
+        }
+.container {
+    display: flex;
+    height: 100vh;
+}
+.left {
+    flex: 0 1 30%;  /* 基准30%，可收缩不可扩展 */
+    min-width: 250px; /* 最小宽度限制 */
+    max-width: 400px; /* 最大宽度限制 */
+}
+.right {
+    flex: 1;  /* 自动填充剩余空间 */
+    min-width: 300px; /* 保证最小显示区域 */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧框架 -->
+        <div class="frame-wrapper left">
+            <h2 class="frame-title">我想问一句</h2>
+            <iframe
+                src="deepseek_silicon.html"
+                title="Left Frame"
+                allowfullscreen
+                sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
+            </iframe>
+        </div>
+        <!-- 右侧框架 -->
+        <div class="frame-wrapper right">
+            <h2 class="frame-title">图书馆资源</h2>
+            <iframe
+                src="https://mfindsdnu.libsp.cn/#/Home"
+                title="Right Frame"
+                allowfullscreen
+                sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
+            </iframe>
+        </div>
+    </div>
+    <script>
+        // 自动调整框架高度
+        window.addEventListener('resize', () => {
+            const frames = document.querySelectorAll('iframe');
+            frames.forEach(frame => {
+                frame.style.height = `${frame.parentElement.clientHeight - 50}px`;
+            });
+        });
+        // 初始化高度
+        window.dispatchEvent(new Event('resize'));
+    </script>
+</body>
+</html>
