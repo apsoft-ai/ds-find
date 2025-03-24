@@ -242,6 +242,12 @@ function str_cnblogsurl(url){
 
 	tstr = url;
 
+	if(文本操作.寻找文本(tstr, "cnblogs", 0) == -1 ){
+
+		return tstr;
+
+	}
+
 
 
 	tstrs = 文本操作.取指定文本(tstr, "t=", "&download");
@@ -274,15 +280,15 @@ function str_cnblogsurl(url){
 
 
 
+		return tstr;
+
 	}else{
 
-		tstr = url;
+		return tstr;
 
 
 
 	}
-
-	return tstr;
 
 }
 
@@ -361,6 +367,44 @@ function num_getrandom(min, max, count){
 	return tarray;
 
 }
+
+function str_stripquote(str){
+
+	var tstr;
+
+
+
+
+
+	tstr = str;
+
+	if(文本操作.取文本左边(tstr, 1) == 转换操作.代码转字符(34) ){
+
+		tstr = 文本操作.取文本右边(tstr, 文本操作.取文本长度(tstr)-1);
+
+	}
+
+	if(文本操作.取文本右边(tstr, 1) == 转换操作.代码转字符(34) ){
+
+		tstr = 文本操作.取文本左边(tstr, 文本操作.取文本长度(tstr)-1);
+
+	}
+
+	if(文本操作.取文本左边(tstr, 1) == 转换操作.代码转字符(39) ){
+
+		tstr = 文本操作.取文本右边(tstr, 文本操作.取文本长度(tstr)-1);
+
+	}
+
+	if(文本操作.取文本右边(tstr, 1) == 转换操作.代码转字符(39) ){
+
+		tstr = 文本操作.取文本左边(tstr, 文本操作.取文本长度(tstr)-1);
+
+	}
+
+	return tstr;
+
+}
 window["公用模块"]["ts_lnbox"]=ts_lnbox;
 window["公用模块"]["ts_ask"]=ts_ask;
 window["公用模块"]["ts_input"]=ts_input;
@@ -376,4 +420,5 @@ window["公用模块"]["str_cnblogsurl"]=str_cnblogsurl;
 window["公用模块"]["str_getmid"]=str_getmid;
 window["公用模块"]["num_isinarray"]=num_isinarray;
 window["公用模块"]["num_getrandom"]=num_getrandom;
+window["公用模块"]["str_stripquote"]=str_stripquote;
 })();
